@@ -31,10 +31,8 @@ uint8_t IEND[] = {
     174, 66, 96, 130 //crc
 };
 
-typedef bytes png_data;
-
-png_data* new_png() {
-    png_data* pd = new_bytes(255);
+bytes* new_png() {
+    bytes* pd = new_bytes(255);
     if (!pd) return NULL;
 
     if (add_bytes_from(pd, SIG_IHDR, sizeof(SIG_IHDR), false) != 0) return NULL;;
@@ -42,7 +40,7 @@ png_data* new_png() {
     return pd;
 }
 
-uint8_t complete_png_data(png_data* pd) {
+uint8_t complete_png_data(bytes* pd) {
     uint8_t ret = add_bytes_from(pd, IEND, sizeof(IEND), false);
     if (ret != 0) return ret;
 
@@ -70,7 +68,7 @@ pixel* new_pixel(uint8_t R, uint8_t G, uint8_t B, uint8_t A) {
     return px;
 }
 
-uint8_t add_pixel(png_data* pd, pixel* px) {
+uint8_t add_pixel(bytes* pd, pixel* px) {
     uint8_t DUMMY[] = {
         0, 0, 0, 11,        //chunk len
         73, 68, 65, 84,     //chunk type //IDAT [actual image data]
