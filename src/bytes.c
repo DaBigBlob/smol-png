@@ -1,11 +1,10 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #ifndef BYTES
 #define BYTES "0.1"
 
-#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef enum _boolean {
     true = 1,
