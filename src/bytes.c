@@ -93,8 +93,8 @@ uint8_t add_bytes_from(bytes* dst, uint8_t* src, uint8_t len, boolean take_owner
 uint8_t add_bytes(bytes* dst, bytes* src, uint8_t len, boolean take_ownership) {
     uint8_t ret = add_bytes_from(dst, src->body, len, false);
     if (take_ownership) free_bytes(src);
+    
     return ret;
-
 }
 
 void lock_bytes(bytes* bs) {
