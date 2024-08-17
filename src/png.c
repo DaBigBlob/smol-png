@@ -61,6 +61,6 @@ typedef struct _pixel {
 uint8_t add_pixel(png_data* pd, pixel* px) {
 
     return 0;
-}
+} 
 
 #endif

@@ -1,4 +1,5 @@
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #ifndef BYTES
@@ -104,5 +105,21 @@ void unlock_bytes(bytes* bs) {
     bs->lock = false;
 }
 
+void print_bytes(bytes* bs) {
+    printf("{");
+    for (uint8_t i=bs->len-1; i>=0; i--) {
+        printf("%i", bs->body[i]);
+    }
+    printf("}");
+}
+
+uint8_t bytes_to_file(bytes* bs, char* name) {
+    FILE* f = fopen("smol.png", "w");
+    if (!f) return 1;
+
+    if (fwrite(bs->body, 1, bs->len, f) != bs->len) return 2;
+
+    return 0;
+}
 
 #endif

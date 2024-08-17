@@ -17,7 +17,10 @@ uint32_t* adler32() {
 bytes* generate_zlibstream(pixel* px) {
     bytes* bs = new_bytes(255);
     if (!bs) return NULL;
-    //TODO
+
+    add_byte_unsafe(bs, zlib_CMF);
+    add_byte_unsafe(bs, zlib_FLG);
+
     return NULL;
 }
 
