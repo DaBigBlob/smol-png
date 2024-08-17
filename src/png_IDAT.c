@@ -13,9 +13,7 @@ typedef struct _png_IDAT_struct {
     uint32_t crc;
 } png_IDAT_struct;
 
-typedef bytes png_IDAT_data;
-
-png_IDAT_data* serialize_png_IDAT(png_IDAT_struct* istr) {
+bytes* serialize_png_IDAT(png_IDAT_struct* istr) {
     bytes* pid = new_bytes(255);
     if (!pid) goto ret;
 
