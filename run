@@ -1,4 +1,4 @@
 #!/bin/sh
 
 ./build
-./smol_png
+./smol_png.bin

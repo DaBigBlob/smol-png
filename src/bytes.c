@@ -87,6 +87,11 @@ uint8_t add_bytes_from(bytes* dst, uint8_t* src, uint8_t len, boolean take_owner
 
     if (take_ownership) free(src);
 
+    #define DEBUG
+    #ifdef DEBUG
+    
+    #endif
+
     return 0;
 }
 
@@ -107,14 +112,14 @@ void unlock_bytes(bytes* bs) {
 
 void print_bytes(bytes* bs) {
     printf("{");
-    for (uint8_t i=bs->len-1; i>=0; i--) {
-        printf("%i", bs->body[i]);
+    for (uint8_t i=bs->len; i>=1; i--) {
+        printf("%i, ", bs->body[i-1]);
     }
-    printf("}");
+    printf("}\n");
 }
 
 uint8_t bytes_to_file(bytes* bs, char* name) {
-    FILE* f = fopen("smol.png", "w");
+    FILE* f = fopen(name, "w");
     if (!f) return 1;
 
     if (fwrite(bs->body, 1, bs->len, f) != bs->len) return 2;
