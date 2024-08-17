@@ -26,26 +26,27 @@ void free_bytes(bytes* bs) {
 
 bytes* new_bytes(uint8_t size) {
     bytes* b = malloc(sizeof(bytes));
-    if (!b) return NULL;
+    if (!b) goto bad;
 
-    if (memset(b, 0, sizeof(bytes)) != b) {
-        free(b);
-        return NULL;
-    }
+    if (memset(b, 0, sizeof(bytes)) != b) goto free_struct;
 
     b->body = malloc(size);
-    if (!b->body) return NULL;
+    if (!b->body) goto bad;
 
-    if (memset(b->body, 0, size) != b->body) {
-        free(b);
-        return NULL;
-    }
+    if (memset(b->body, 0, size) != b->body) goto free_body;
 
     b->size = size;
     b->len = 0;
     b->lock = false;
 
     return b;
+
+    free_body:
+        free(b->body);
+    free_struct:
+        free(b);
+    bad:
+        return NULL;
 }
 
 void add_byte_unsafe(bytes* bs, uint8_t b) {
@@ -86,11 +87,6 @@ uint8_t add_bytes_from(bytes* dst, uint8_t* src, uint8_t len, boolean take_owner
     dst->len += len;
 
     if (take_ownership) free(src);
-
-    #define DEBUG
-    #ifdef DEBUG
-    
-    #endif
 
     return 0;
 }
