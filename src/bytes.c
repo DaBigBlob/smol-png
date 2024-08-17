@@ -112,8 +112,8 @@ void unlock_bytes(bytes* bs) {
 
 void print_bytes(bytes* bs) {
     printf("{");
-    for (uint8_t i=bs->len; i>=1; i--) {
-        printf("%i, ", bs->body[i-1]);
+    for (uint8_t i=0; i<=bs->len-1; i++) {
+        printf("%i, ", bs->body[i]);
     }
     printf("}\n");
 }
