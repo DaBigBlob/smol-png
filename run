@@ -1,0 +1,4 @@
+#!/bin/sh
+
+./build
+./smol_png
