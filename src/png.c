@@ -71,7 +71,7 @@ pixel* new_pixel(uint8_t R, uint8_t G, uint8_t B, uint8_t A) {
 }
 
 uint8_t add_pixel(png_data* pd, pixel* px) {
-    uint8_t IDAT[] = {
+    uint8_t DUMMY[] = {
         0, 0, 0, 11,        //chunk len
         73, 68, 65, 84,     //chunk type //IDAT [actual image data]
             //chunk data begin (zlib)
@@ -97,7 +97,7 @@ uint8_t add_pixel(png_data* pd, pixel* px) {
             //chunk data end
         12, 187, 91, 231,   //crc of chunk type and chunk data
     };
-    uint8_t ret = add_bytes_from(pd, IDAT, sizeof(IDAT), false);
+    uint8_t ret = add_bytes_from(pd, DUMMY, sizeof(DUMMY), false);
     if (ret != 0) return ret;
 
     return 0;
