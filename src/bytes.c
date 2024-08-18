@@ -111,7 +111,7 @@ void print_bytes(bytes* bs) {
         printf("%i", bs->body[i]);
         if (i != bs->len-1) printf(", ");
     }
-    printf("]\n");
+    printf("] (%u bytes)\n", bs->len);
 }
 
 uint8_t bytes_to_file(bytes* bs, char* name) {
