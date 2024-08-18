@@ -106,11 +106,12 @@ void unlock_bytes(bytes* bs) {
 }
 
 void print_bytes(bytes* bs) {
-    printf("{");
+    printf("[");
     for (uint8_t i=0; i<=bs->len-1; i++) {
-        printf("%i, ", bs->body[i]);
+        printf("%i", bs->body[i]);
+        if (i != bs->len-1) printf(", ");
     }
-    printf("}\n");
+    printf("]\n");
 }
 
 uint8_t bytes_to_file(bytes* bs, char* name) {
