@@ -1,5 +1,4 @@
 
-#include <stdio.h>
 #ifndef IDAT
 #define IDAT "0.1"
 
