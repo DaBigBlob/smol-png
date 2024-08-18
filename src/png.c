@@ -51,18 +51,6 @@ uint8_t complete_png_data(bytes* pd) {
     return 0;
 }
 
-pixel* new_pixel(uint8_t R, uint8_t G, uint8_t B, uint8_t A) {
-    pixel* px = malloc(sizeof(pixel));
-    if (!px) return NULL;
-
-    px->R = R;
-    px->G = G;
-    px->B = B;
-    px->A = A;
-
-    return px;
-}
-
 uint8_t add_pixel(bytes* pd, pixel* px) {
     // uint8_t DUMMY[] = {
     //     0, 0, 0, 11,        //chunk len

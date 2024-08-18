@@ -145,4 +145,16 @@ typedef struct _pixel {
     uint8_t A;
 } pixel;
 
+pixel* new_pixel(uint8_t R, uint8_t G, uint8_t B, uint8_t A) {
+    pixel* px = malloc(sizeof(pixel));
+    if (!px) return NULL;
+
+    px->R = R;
+    px->G = G;
+    px->B = B;
+    px->A = A;
+
+    return px;
+}
+
 #endif
