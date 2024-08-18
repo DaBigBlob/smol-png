@@ -62,18 +62,33 @@ uint8_t add_byte(bytes* bs, uint8_t b) {
     return 0;
 }
 
-void add_uint32_unsafe(bytes* bs, uint32_t b4) {
+void add_uint32_unsafe_le(bytes* bs, uint32_t b4) {
     for (uint8_t i=0;i<4;i++) {
         add_byte_unsafe(bs, (uint8_t) (b4&0b11111111));
         b4>>=8;
     }
 }
 
-uint8_t add_uint32(bytes* bs, uint32_t b4) {
+uint8_t add_uint32_le(bytes* bs, uint32_t b4) {
     if (bs->lock == true) return 1;
     if (bs->len+1 >= bs->size) return 2;
 
-    add_uint32_unsafe(bs, b4);
+    add_uint32_unsafe_le(bs, b4);
+
+    return 0;
+}
+
+void add_uint32_unsafe_be(bytes* bs, uint32_t b4) {
+    for (short i=3;i>=0;i--) {
+        add_byte_unsafe(bs, (uint8_t) ((b4 >> (i*8))&0b11111111));
+    }
+}
+
+uint8_t add_uint32_be(bytes* bs, uint32_t b4) {
+    if (bs->lock == true) return 1;
+    if (bs->len+1 >= bs->size) return 2;
+
+    add_uint32_unsafe_be(bs, b4);
 
     return 0;
 }
@@ -122,5 +137,12 @@ uint8_t bytes_to_file(bytes* bs, char* name) {
 
     return 0;
 }
+
+typedef struct _pixel {
+    uint8_t R;
+    uint8_t G;
+    uint8_t B;
+    uint8_t A;
+} pixel;
 
 #endif
